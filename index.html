@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eid Celebration</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
+    @import url("https://fonts.googleapis.com/css2?family=Kalam:wght@400&display=swap");
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Eid Animation Styles (from 2nd code) */
+    body {
+      font-family: 'Bubblegum Sans', cursive;
+      color: #fff;
+    }
+    
+    .eid-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url('https://image.freepik.com/free-vector/ramadan-landscape-background-sunset_1048-1789.jpg'), 
+                      linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1));
+      background-blend-mode: overlay;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      overflow: hidden;
+    }
+    
+    .eid-container {
+      width: 100%;
+      text-align: center;
+    }
+    
+    /* First Animation - Falling Text */
+    .falling-text {
+      font-size: clamp(6vw, 4em, 8vw);
+      font-weight: 800;
+      letter-spacing: 2px;
+      position: absolute;
+      width: 100%;
+      transform: translateY(-100vh);
+      animation: fallIn 1.5s ease-out forwards;
+    }
+    
+    /* Second Animation - Cut Through */
+    .text-wrapper {
+      position: relative;
+      height: 1.2em;
+      margin: 0 auto;
+      font-size: clamp(6vw, 4em, 8vw);
+      font-weight: 800;
+      letter-spacing: 2px;
+      opacity: 0;
+      animation: fadeIn 0.5s forwards 2s;
+    }
+    
+    .top-half, .bottom-half {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      overflow: hidden;
+    }
+    
+    .top-half {
+      height: 50%;
+      top: 0;
+      animation: goUp 1s forwards;
+      animation-delay: 2.5s;
+    }
+    
+    .bottom-half {
+      height: 50%;
+      bottom: 0;
+      animation: goDown 1s forwards;
+      animation-delay: 2.5s;
+    }
+    
+    .middle-text {
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: clamp(2vw, 1.2em, 3vw);
+      letter-spacing: 1px;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+      animation-delay: 3.5s;
+    }
+    
+    .date {
+      margin-top: 1.5em;
+      font-size: clamp(2vw, 1em, 3vw);
+      letter-spacing: 1px;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+      animation-delay: 4.5s;
+    }
+    
+    /* Keyframes */
+    @keyframes fallIn {
+      0% { transform: translateY(-100vh); }
+      70% { transform: translateY(10%); }
+      100% { transform: translateY(0); }
+    }
+    
+    @keyframes goUp {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+    
+    @keyframes goDown {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(50%); }
+    }
+    
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* Gallery Styles (from 1st code - unchanged) */
+    :root {
+      --adjust-size: 0px;
+    }
+    
+    html, body {
+      scroll-behavior: smooth;
+    }
+    
+    main {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 100vw;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: "Kalam", sans-serif;
+      color: #222;
+      background-image: url("https://images.unsplash.com/photo-1531685250784-7569952593d2?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTMyOTE2OTh8&ixlib=rb-4.0.3&q=100&w=3000");
+      background-size: cover;
+    }
+    
+    p {
+      line-height: 1;
+    }
+    
+    a {
+      color: crimson;
+      text-decoration: none;
+    }
+    
+    img {
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      pointer-events: none;
+    }
+    
+    #gallery {
+      position: relative;
+      left: calc(-1 * var(--adjust-size));
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      max-width: 100vw;
+      padding: 20px;
+      -webkit-perspective: 0;
+      perspective: 0;
+    }
+    
+    #gallery figure:nth-child(7n) {
+      --duration: 1s;
+      --pin-color: crimson;
+    }
+    
+    #gallery figure:nth-child(7n + 1) {
+      --duration: 1.8s;
+      --pin-color: hotpink;
+    }
+    
+    #gallery figure:nth-child(7n + 2) {
+      --duration: 1.3s;
+      --pin-color: magenta;
+    }
+    
+    #gallery figure:nth-child(7n + 3) {
+      --duration: 1.5s;
+      --pin-color: orangered;
+    }
+    
+    #gallery figure:nth-child(7n + 4) {
+      --duration: 1.1s;
+      --pin-color: darkorchid;
+    }
+    
+    #gallery figure:nth-child(7n + 5) {
+      --duration: 1.6s;
+      --pin-color: deeppink;
+    }
+    
+    #gallery figure:nth-child(7n + 6) {
+      --duration: 1.2s;
+      --pin-color: mediumvioletred;
+    }
+    
+    #gallery figure:nth-child(3n) {
+      --angle: 3deg;
+    }
+    
+    #gallery figure:nth-child(3n + 1) {
+      --angle: -3.3deg;
+    }
+    
+    #gallery figure:nth-child(3n + 2) {
+      --angle: 2.4deg;
+    }
+    
+    #gallery figure:nth-child(odd) {
+      --direction: alternate;
+    }
+    
+    #gallery figure:nth-child(even) {
+      --direction: alternate-reverse;
+    }
+    
+    #gallery figure {
+      --angle: 3deg;
+      --count: 5;
+      --duration: 1s;
+      --delay: calc(-0.5 * var(--duration));
+      --direction: alternate;
+      --pin-color: red;
+    
+      position: relative;
+      display: inline-block;
+      margin: var(--adjust-size);
+      padding: 0.5rem;
+      border-radius: 5px;
+      box-shadow: 0 7px 8px rgba(0, 0, 0, 0.4);
+      width: 100%;
+      height: auto;
+      text-align: center;
+      background-color: ghostwhite;
+      background-image: url("https://images.unsplash.com/photo-1629968417850-3505f5180761?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTMzMjQ3ODJ8&ixlib=rb-4.0.3&q=80&w=500");
+      background-size: cover;
+      background-position: center;
+      background-blend-mode: multiply;
+    
+      transform-origin: center 0.22rem;
+      will-change: transform;
+      break-inside: avoid;
+      overflow: hidden;
+      outline: 1px solid transparent;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    
+    #gallery.active figure {
+      animation-duration: var(--duration), 1.5s;
+      animation-delay: var(--delay),
+        calc(var(--delay) + var(--duration) * var(--count));
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: var(--count), 1;
+      animation-direction: var(--direction), normal;
+      animation-fill-mode: both;
+      animation-name: swing, swingEnd;
+    }
+    
+    #gallery figure:after {
+      position: absolute;
+      top: 0.22rem;
+      left: 50%;
+      width: 0.7rem;
+      height: 0.7rem;
+      content: "";
+      background: var(--pin-color);
+      border-radius: 50%;
+      box-shadow: -0.1rem -0.1rem 0.3rem 0.02rem rgba(0, 0, 0, 0.5) inset;
+      filter: drop-shadow(0.3rem 0.15rem 0.2rem rgba(0, 0, 0, 0.5));
+      transform: translateZ(0);
+      z-index: 2;
+    }
+    
+    figure img {
+      aspect-ratio: 1 /1;
+      width: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      z-index: 1;
+    }
+    
+    figure figcaption {
+      font-size: 14px;
+      font-weight: 400;
+      z-index: 1;
+    }
+    
+    figure h2 {
+      color: crimson;
+      font-size: 22px;
+    }
+    
+    figure p {
+      font-size: 17px;
+    }
+    
+    figure small {
+      font-size: 12px;
+    }
+    
+    figure > div {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    @keyframes swing {
+      0% {
+        transform: rotate3d(0, 0, 1, calc(-1 * var(--angle)));
+      }
+      100% {
+        transform: rotate3d(0, 0, 1, var(--angle));
+      }
+    }
+    
+    @keyframes swingEnd {
+      to {
+        transform: rotate3d(0, 0, 1, 0deg);
+      }
+    }
+    
+    #info {
+      position: relative;
+      text-align: center;
+      z-index: 1;
+      padding: 20px;
+      background-color: rgba(0,0,0,0.7);
+      color: white;
+    }
+    
+    #info a {
+      font-size: 1.1rem;
+      color: #ff9999;
+    }
+    
+    @media (min-width: 800px) {
+      #gallery {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Eid Animation Section (from 2nd code) -->
+  <section class="eid-section">
+    <div class="eid-container">
+      <h1 class="falling-text">Eid Mubarak</h1>
+      
+      <div class="text-wrapper">
+        <div class="top-half">
+          <div style="position: absolute; top: 0; width: 100%;">Eid Mubarak</div>
+        </div>
+        <div class="middle-text">By Tahmin Zawad</div>
+        <div class="bottom-half">
+          <div style="position: absolute; bottom: 0; width: 100%;">Eid Mubarak</div>
+        </div>
+      </div>
+      <div class="date">May your Eid be joyful</div>
+      <img src="https://cdn-icons-png.flaticon.com/128/10412/10412527.png" style="margin-top: 200px;" height="50px">
+    </div>
+  </section>
+
+  <!-- Gallery Section (from 1st code - unchanged) -->
+  <main>
+    <div id="gallery">
+      <figure>
+        <img src="https://i.pinimg.com/736x/5a/36/1c/5a361cc06025ef3d37531eb6e35a69a3.jpg" alt="People sharing some dried dates" title="People sharing some dried dates">
+        
+      </figure>
+      <figure>
+        <div>
+          <div>
+            <h2>Eidi Disappointment</h2>
+            <p>Me: Excited for Eidi! 💰
+              Uncle: Hands me 20 taka
+              Me: This won’t even buy a Frooti… 😭</p>
+    
+          </div>
+        </div>
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/72/1c/ba/721cbaad274b7c8b73d2d747773e6c6d.jpg" alt="Low angle view up into a sky filled with deep blue clouds. " title="Mix dried fruits (date palm fruits, prunes, dried apricots, raisins) and nuts, and traditional Arabic tea. Ramadan (Ramazan) food">
+        
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/52/a6/e9/52a6e99a7042d287ca35fa90ffb68b91.jpg" title="Photo by Simeon Muller for Unsplash">
+        
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/c8/22/c8/c822c885ac64b1327465e0de2c26c79e.jpg" alt="A Muslim praying in a modern mosque during the holy Muslim month of Ramadan" title="A Muslim praying in a modern mosque during the holy Muslim month of Ramadan">
+        
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/73/7c/00/737c00b35e03e1689ae9b5c36a288ccb.jpg" alt="Front view different dried fruits along with nuts all kind on the grey floor" title="Front view different dried fruits along with nuts all kind on the grey floor">
+        
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/6e/d8/73/6ed87399a56074b897988afb1f40c5e8.jpg" alt="A mosque with a moon and planets in the background" title="A mosque with a moon and planets in the background">
+        
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/28/2d/46/282d46ad630411216d47649825a4eb9b.jpg" alt="top view table arrangement with quran, roses and pastries">
+        
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/2d/0c/3e/2d0c3e8664792eb6460c299707383548.jpg" alt="Ramadan Kareem Eid Mubarak Royal Elegant Lamp with Mosque Holy Gate with fireworks" title="Ramadan Kareem Eid Mubarak Royal Elegant Lamp with Mosque Holy Gate with fireworks">
+        
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/5c/69/cd/5c69cdc2d6b213a03aadcdf5d0429a64.jpg" alt="decoration with lantern and quran" title="decoration with lantern and quran">
+        
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/70/c8/ee/70c8eefe343cd459791e49d9f1f16f6b.jpg" alt="cloudy sky. " title="Photo by Alex Machado for Unsplash">
+        
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/33/3a/48/333a48f4dbb511511c10eea8b4d565fd.jpg" alt="Black tea is poured from steel teapot to crystal armudu glass" title="Black tea is poured from steel teapot to crystal armudu glass">
+        
+      </figure>
+      <figure>
+        <div>
+          <div>
+            <h2>Disappointment</h2>
+            <p>Me: Thinking what to do, Just realized nothing to do in EID 😭, and missing previous days</p>
+           
+          </div>
+        </div>
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/c2/c2/e2/c2c2e26a0adfd3af7dd02ee6c3042fa8.jpg" alt="Man meditating with beads next to singing bowl" title="Man meditating with beads next to singing bowl">
+        
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/7d/d5/3c/7dd53c0d0d3011731107d3954cb29519.jpg" title="Mix dried fruits (date palm fruits, prunes, dried apricots, raisins) and nuts, and traditional Arabic tea. Ramadan (Ramazan) food. Top view">
+        
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/cf/62/df/cf62df7d221268e917b7d5493ace3c7c.jpg" alt="photo a mosque with a blue dome and a starry sky">
+        
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/21/95/a5/2195a57f1ca51a3a1c7146a974913c30.jpg" title="People sharing some dried dates">
+        
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/a8/10/c0/a810c03c201fc66e36dbca1861dd4d24.jpg" alt="Low angle view up into a sky filled with deep blue clouds. " title="Mix dried fruits (date palm fruits, prunes, dried apricots, raisins) and nuts, and traditional Arabic tea. Ramadan (Ramazan) food">
+        
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/5a/2f/f8/5a2ff8a393378c50c7ba9d9df664fd53.jpg" alt="Ramadan Kareem Eid Mubarak Royal Elegant Lamp with Mosque Holy Gate with fireworks" title="Photo by Simeon Muller for Unsplash">
+        
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/03/8b/f8/038bf830637c1171c58dfe7302429e5d.jpg" alt="A Muslim praying in a modern mosque during the holy Muslim month of Ramadan" title="A Muslim praying in a modern mosque during the holy Muslim month of Ramadan">
+        
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/d2/43/22/d2432239b2fae29d3d322b1ef3e2a7c3.jpg" alt="Front view different dried fruits along with nuts all kind on the grey floor" title="Front view different dried fruits along with nuts all kind on the grey floor">
+        
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/9d/bf/6a/9dbf6afad8c582c1fe0ceae9f492ee12.jpg" alt="A mosque with a moon and planets in the background" title="A mosque with a moon and planets in the background">
+        
+      </figure>
+      <figure>
+        <img src="https://i.pinimg.com/736x/86/96/ce/8696ce0b74ec213bff6744b83d1ebe34.jpg" alt="top view table arrangement with quran, roses and pastries">
+        
+      </figure>
+    </div>
+  </main>
+
+  <footer id='info'>
+    Wish you a happy Eid day!   |   😁Salami ta dia dien ok? Dien kintu ~ 01911270915<br>
+    This page is made by: <a target="_blank" href="https://www.linkedin.com/in/tahmin-zawad/?originalSubdomain=bd">Tahmin Zawad | DARI_BHAI | Person_X</a>
+  </footer>
+
+  <script>
+    // Switch from falling animation to cut-through animation
+    setTimeout(() => {
+      document.querySelector('.falling-text').style.display = 'none';
+    }, 2000);
+    
+    // Gallery Animation (from 1st code - unchanged)
+    (function () {
+      window.onload = () => {
+        const obj = document.querySelector("#gallery");
+        const time = 10000;
+        function animStart() {
+          if (obj.classList.contains("active") == false) {
+            obj.classList.add("active");
+            setTimeout(() => {
+              animEnd();
+            }, time);
+          }
+        }
+        function animEnd() {
+          obj.classList.remove("active");
+          obj.offsetWidth;
+        }
+        document.addEventListener("scroll", function () {
+          animStart();
+        });
+        window.addEventListener("resize", animStart);
+        animStart();
+      };
+    })();
+  </script>
+</body>
+</html>
